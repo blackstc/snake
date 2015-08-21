@@ -509,11 +509,15 @@ function drawCircle(centerX, centerY, radius, sides) {
     graph.fill();
 }
 
+//updated to draw square foods
 function drawFood(food) {
     graph.strokeStyle = food.color.border || foodConfig.borderColor;
     graph.fillStyle = food.color.fill || foodConfig.fillColor;
     graph.lineWidth = foodConfig.border;
-    drawCircle(food.x - player.x + screenWidth / 2, food.y - player.y + screenHeight / 2, food.radius, 9);
+    graph.beginPath();
+    graph.rect(food.x - player.x + screenWidth / 2, food.y - player.y + screenHeight / 2, 30, 30);
+    graph.closePath();
+    graph.fill();
 }
 
 function drawFireFood(mass) {
@@ -801,14 +805,14 @@ function gameLoop() {
             }
 
             for (var i = 0; i < enemies.length; i++) {
-                if (enemies[i].mass <= player.mass) 
+                if (enemies[i].mass <= player.mass)
                     drawEnemy(enemies[i]);
             }
 
             drawPlayer();
 
             for (var j = 0; j < enemies.length; j++) {
-                if (enemies[j].mass > player.mass) 
+                if (enemies[j].mass > player.mass)
                     drawEnemy(enemies[j]);
             }
 
